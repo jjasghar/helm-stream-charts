@@ -1,16 +1,16 @@
 version: 2
 jobs:
-  # lint-charts:
-  #   docker:
-  #     - image: gcr.io/kubernetes-charts-ci/test-image:v3.3.2
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: lint
-  #         command: |
-  #           git remote add upstream https://github.com/paulczar/percona-helm-charts
-  #           git fetch upstream master
-  #           ct lint --config .circleci/ct.yaml
+  lint-charts:
+    docker:
+      - image: gcr.io/kubernetes-charts-ci/test-image:v3.3.2
+    steps:
+      - checkout
+      - run:
+          name: lint
+          command: |
+            git remote add upstream https://github.com/paulczar/percona-helm-charts
+            git fetch upstream master
+            ct lint --config .circleci/ct.yaml
 
   # install-charts:
   #   machine: true
@@ -42,15 +42,15 @@ jobs:
 
 workflows:
   version: 2
-  # lint-and-install:
-  #   jobs:
-  #     - lint-scripts
-  #     - lint-charts:
-  #         filters:
-  #           branches:
-  #             ignore: master
-  #           tags:
-  #             ignore: /.*/
+  lint-and-install:
+    jobs:
+      - lint-scripts
+      - lint-charts:
+          filters:
+            branches:
+              ignore: master
+            tags:
+              ignore: /.*/
   #     - install-charts:
   #         requires:
   #           - lint-charts
