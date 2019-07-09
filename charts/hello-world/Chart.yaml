@@ -3,3 +3,7 @@ appVersion: "1.0"
 description: A Helm chart for Kubernetes
 name: hello-world
 version: 0.2.0
+home: http://jjasghar.github.io
+maintainers:
+  - name: JJ Asghar
+    email: awesome@ibm.com
