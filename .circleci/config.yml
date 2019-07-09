@@ -12,13 +12,13 @@ jobs:
             git fetch upstream master
             ct lint --config .circleci/ct.yaml
 
-  # install-charts:
-  #   machine: true
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         no_output_timeout: 12m
-  #         command: .circleci/install_charts.sh
+  install-charts:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          no_output_timeout: 12m
+          command: .circleci/install_charts.sh
 
   lint-scripts:
     docker:
@@ -51,9 +51,9 @@ workflows:
               ignore: master
             tags:
               ignore: /.*/
-  #     - install-charts:
-  #         requires:
-  #           - lint-charts
+      - install-charts:
+          requires:
+            - lint-charts
   release:
     jobs:
       - release-charts:
